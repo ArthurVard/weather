@@ -1,0 +1,25 @@
+{
+  "name": "weather",
+  "description": "use forecastio",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "weather",
+    "forecastio"
+  ],
+  "authors": [
+    "Arthur Vardanyan"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "typeahead-addresspicker": "0.1.4"
+  }
+}
