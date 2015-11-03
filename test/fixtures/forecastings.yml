@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  geoname_id: MyString
+  data: MyText
+
+two:
+  geoname_id: MyString
+  data: MyText

@@ -1,0 +1,27 @@
+<h1>Listing forecastings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Geoname</th>
+      <th>Data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forecastings.each do |forecasting| %>
+      <tr>
+        <td><%= forecasting.geoname_id %></td>
+        <td><%= forecasting.data %></td>
+        <td><%= link_to 'Show', forecasting %></td>
+        <td><%= link_to 'Edit', edit_forecasting_path(forecasting) %></td>
+        <td><%= link_to 'Destroy', forecasting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Forecasting', new_forecasting_path %>

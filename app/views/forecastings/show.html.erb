@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Geoname:</strong>
+  <%= @forecasting.geoname_id %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @forecasting.data %>
+</p>
+
+<%= link_to 'Edit', edit_forecasting_path(@forecasting) %> |
+<%= link_to 'Back', forecastings_path %>
