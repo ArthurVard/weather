@@ -1,5 +1,33 @@
 <h1>Listing forecastings</h1>
 
+<%= form_for(@forecasting) do |f| %>
+  <% if @forecasting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forecasting.errors.count, "error") %> prohibited this forecasting from being saved:</h2>
+
+      <ul>
+      <% @forecasting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <%= f.text_field :latitude %>
+    <%= f.text_field :longitude %>
+
+  </div>
+   <div class="actions">
+     <%= f.submit  :id=> "btn_submit"%>
+    </div>
+ 
+  
+<% end %>
+
+
 <table>
   <thead>
     <tr>
@@ -13,7 +41,7 @@
     <% @forecastings.each do |forecasting| %>
       <tr>
         <td><%= forecasting.geoname_id %></td>
-        <td><%= forecasting.data %></td>
+        <td><%= forecasting.data["latitude"] %></td>
         <td><%= link_to 'Show', forecasting %></td>
         <td><%= link_to 'Edit', edit_forecasting_path(forecasting) %></td>
         <td><%= link_to 'Destroy', forecasting, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,5 +1,8 @@
+require 'forecastio/forecast'
+
 class ForecastingsController < ApplicationController
   before_action :set_forecasting, only: [:show, :edit, :update, :destroy]
+  before_action :init_forecasting, only: [:index]
 
   # GET /forecastings
   # GET /forecastings.json
@@ -25,6 +28,12 @@ class ForecastingsController < ApplicationController
   # POST /forecastings.json
   def create
     @forecasting = Forecasting.new(forecasting_params)
+
+    forecast = ForecastIO::Forecast.new
+    result = forecast.for(@forecasting.name)
+    #@forecasting.latitude = result['latitude']
+    #@forecasting.longitude = result['longitude']
+    @forecasting.data = result #["currently"]["summary"]
 
     respond_to do |format|
       if @forecasting.save
@@ -67,8 +76,12 @@ class ForecastingsController < ApplicationController
       @forecasting = Forecasting.find(params[:id])
     end
 
+     def init_forecasting
+      @forecasting = Forecasting.new
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def forecasting_params
-      params.require(:forecasting).permit(:geoname_id, :data)
+      params.require(:forecasting).permit(:geoname_id, :data, :name, :latitude, :longitude)
     end
 end
