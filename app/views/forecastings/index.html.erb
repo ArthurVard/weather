@@ -12,10 +12,17 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+   
+    <%= f.text_field :name, :id=>'address', :placeholder=>"Enter an address", :class=>'typeahead'%>
+  </div>
+ <pre class="response" id="response1">
+        </pre>
+
+<br>
+<br>
+  <div class="field">
+   
     <%= f.text_field :latitude %>
     <%= f.text_field :longitude %>
 

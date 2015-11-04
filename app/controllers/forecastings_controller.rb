@@ -37,7 +37,7 @@ class ForecastingsController < ApplicationController
 
     respond_to do |format|
       if @forecasting.save
-        format.html { redirect_to @forecasting, notice: 'Forecasting was successfully created.' }
+        format.html { redirect_to forecastings_url, notice: 'Forecasting was successfully created.' }
         format.json { render :show, status: :created, location: @forecasting }
       else
         format.html { render :new }

@@ -2,8 +2,49 @@
 //# All this logic will automatically be available in application.js.
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
+function displayResults(result, div) {
+    html = ["Address: " + result.address()]
+    html.push("Latitude: " + result.lat())
+    html.push("Longitude: " + result.lng())
+    html.push("Long names:")
+    result.addressTypes().forEach(function(type) {
+      html.push("  " + type + ": " + result.nameForType(type))
+    })
+    html.push("Short names:")
+    result.addressTypes().forEach(function(type) {
+      html.push("  " + type + ": " + result.nameForType(type, true))
+    })
+    div.html( html.join('\n'));
+  }
 
 $(document).ready(function() {
+
+//var addressPicker = new AddressPicker();
+
+var addressPicker = new AddressPicker({autocompleteService: {types: ['(cities)']}});
+
+$('#address').typeahead(null, {
+  displayKey: 'description',
+  source: addressPicker.ttAdapter()
+});
+
+ addressPicker.bindDefaultTypeaheadEvent($('#address'))
+    $(addressPicker).on('addresspicker:selected', function (event, result) {
+    console.log(result)
+      html = ["Address: " + result.address()]
+      html.push("Latitude: " + result.lat())
+      html.push("Longitude: " + result.lng())
+      html.push("Long names:")
+      result.addressTypes().forEach(function(type) {
+        html.push("  " + type + ": " + result.nameForType(type))
+      })
+      html.push("Short names:")
+      result.addressTypes().forEach(function(type) {
+        html.push("  " + type + ": " + result.nameForType(type, true))
+      })
+      $('#response1').html( html.join('\n'))
+    })
+  
 
 	/*$('#putts').on('change', function() {
      // Place definition of calculateGIR() here.
@@ -13,7 +54,7 @@ $(document).ready(function() {
  alert("asd");
 	
     var geocoder =  new google.maps.Geocoder();
-    var geoName = $("#forecasting_name").val();
+    var geoName = $("#address").val();
     alert(geocoder);
     console.log(geocoder);
     geocoder.geocode( { 'address': geoName}, function(results, status) {

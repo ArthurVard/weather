@@ -23,11 +23,19 @@ module ForecastIO
 			# placeId = "Yerevan"
 			#lat = "40.1791857";
 			#long = "44.499102900000025";
-			geo_query = "#{geo_host}/json?address=#{placeId}"
+			safe_params = {'address'=>placeId}.to_query
+			geo_query = "#{geo_host}/json?#{safe_params}"
+			puts geo_query
 			geoInfo = getJson geo_query
-			lat = geoInfo["results"][0]["geometry"]["location"]["lat"]
-			lng = geoInfo["results"][0]["geometry"]["location"]["lng"]
-			forecastBy(lat,lng)
+
+			if geoInfo["results"].empty?
+				#TODO: handle nicely
+				#raise "empty result"
+			else
+				lat = geoInfo["results"][0]["geometry"]["location"]["lat"]
+				lng = geoInfo["results"][0]["geometry"]["location"]["lng"]
+				forecastBy(lat,lng)
+			end
 		end
 
 		def forecastBy(latitude, longitute)
@@ -62,7 +70,8 @@ module ForecastIO
 
 	    def getJson path
 	      response = get path
-	      JSON.parse(response.body)
+	      #response.status == 200
+	      	JSON.parse(response.body)
 	    end
 	end
 end
