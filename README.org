@@ -1,0 +1,56 @@
+#+TITLE: Forecast Project in Ruby n Rails
+#+AUTHOR: Arthur Vardanyan
+#+EMAIL: artie.vard@gmail.com
+#+DATE: 2015-11-03
+#+UPDATE: 08:35:49
+#+STARTUP: content
+
+* Instructions / Requirements:
+** Connect to [[https://developer.forecast.io][Weather API]] via HTTP client  
+   Build an application that connects to a Weather API, without using the
+   official/unofficial API libraries. Instead, use a Ruby HTTP client to handle 
+   the API calls. (https://developer.forecast.io)
+*** DONE Create Rails app
+   CLOSED: [2015-11-03 Tue 06:07]
+*** DONE HTTP client set up 
+   CLOSED: [2015-11-03 Tue 07:55]
+*** DONE scaffold controller for forecast requests
+    CLOSED: [2015-11-03 Tue 21:45]
+*** DONE set root path
+    CLOSED: [2015-11-03 Tue 21:45]
+** Display forecast for Postal code or City/State
+   Allow the user to type in a Postal Code or City/State and have their 
+   forecast displayed.
+*** DONE Get (latitude,langitude) by name
+    CLOSED: [2015-11-03 Tue 21:46]
+*** TODO create new brunch and move to use [[http://www.rubygeocoder.com/][Complete Ruby geocoding solution.]] (priority: :low)
+*** DONE by postal code 
+    CLOSED: [2015-11-04 Wed 21:46]
+*** DONE display forecast
+** autocomplete box with recommended results for postal code, city/state
+   When the user types in their Postal Code or City/State, display 
+   an autocomplete box with recommended results.
+*** DONE set up autocomplete data and bind to view
+    CLOSED: [2015-11-04 Wed 10:14]
+
+*** TODO (optional) make autocomplete sugestion for postal code using this source http://www.geonames.org/postalCodeLookupJSON?postalcode=6600&callback=?
+** Persist forecast data for later use 
+   When a forecast is entered, store it in a database (MySql, Postgres, SqlLite,
+   are all fine). When #1 occurs with the same Postal Code or City/State, use the 
+   version saved in the database instead of connecting to the API. 
+   Even if the forecast is old, you can still use the database version. For 
+   this project, you do not need to worry about whether the forecast is old or expired.
+*** Persist forecast for later use
+*** update persisted data (optional)
+
+** display via Ajax 
+   When a user submits a forecast, display it dynamically on the page without
+   refreshing the page (pure Javascript, JQuery, React, Angular, etc. are all 
+   fine here).
+*** DONE ajax displating forecast
+    CLOSED: [2015-11-04 Wed 21:46]
+** UI/UX
+   The interface should be pleasant and a good experience for the user. 
+   Your free to use any UI library of your choosing.
+
+

@@ -2,7 +2,25 @@ require 'forecastio/forecast'
 
 class ForecastingsController < ApplicationController
   before_action :set_forecasting, only: [:show, :edit, :update, :destroy]
-  before_action :init_forecasting, only: [:index]
+  before_action :init_forecasting, only: [:index, :forecast]
+
+  def forecast
+    if params[:search].present?
+      forecast = ForecastIO::Forecast.new
+      placeId = params[:search]
+      @forecasting.name = placeId
+      @forecasting.data = forecast.for(placeId)
+      respond_to do |format|
+        if request.xhr?
+          format.js
+        else
+          format.html {redirect_to :back}
+        end
+      end
+    else
+      #weather for IP location or nothing to do 
+    end
+  end
 
   # GET /forecastings
   # GET /forecastings.json
@@ -39,6 +57,7 @@ class ForecastingsController < ApplicationController
       if @forecasting.save
         format.html { redirect_to forecastings_url, notice: 'Forecasting was successfully created.' }
         format.json { render :show, status: :created, location: @forecasting }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @forecasting.errors, status: :unprocessable_entity }

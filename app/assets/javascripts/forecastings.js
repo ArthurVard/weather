@@ -19,6 +19,9 @@ function displayResults(result, div) {
 
 $(document).ready(function() {
 
+
+$('#address').val('')
+$("input:text").focus(function() { $(this).select(); } );
 //var addressPicker = new AddressPicker();
 
 var addressPicker = new AddressPicker({autocompleteService: {types: ['(cities)']}});
@@ -43,14 +46,25 @@ $('#address').typeahead(null, {
         html.push("  " + type + ": " + result.nameForType(type, true))
       })
       $('#response1').html( html.join('\n'))
+
+      $.ajax({
+
+				type: "GET",
+				url: "/forecast/?search="+$('#address').val(),
+				success: function(data){
+					$('#address').select()
+				},
+
+				error: function (request, status, error) {
+        			alert(error);
+        			}
+				});
     })
   
 
-	/*$('#putts').on('change', function() {
-     // Place definition of calculateGIR() here.
-  	});*/
+	
 
- $("#btn_submit").on('click', function(){
+ $("#some_btn_submit").on('click', function(){
  alert("asd");
 	
     var geocoder =  new google.maps.Geocoder();

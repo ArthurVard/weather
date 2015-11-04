@@ -1,5 +1,3 @@
-<h1>Listing forecastings</h1>
-
 <%= form_for(@forecasting) do |f| %>
   <% if @forecasting.errors.any? %>
     <div id="error_explanation">
@@ -12,16 +10,8 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-   
-    <%= f.text_field :name, :id=>'address', :placeholder=>"Enter an address", :class=>'typeahead'%>
-  </div>
- <pre class="response" id="response1">
-        </pre>
 
-<br>
-<br>
-  <div class="field">
+<!-- <div class="field">
    
     <%= f.text_field :latitude %>
     <%= f.text_field :longitude %>
@@ -29,13 +19,22 @@
   </div>
    <div class="actions">
      <%= f.submit  :id=> "btn_submit"%>
-    </div>
- 
+    </div> -->
+
+
+  <!--  <%= link_to "Forecast", forecast_path(), :method=> :get,  :remote => true %>  -->
+  <div class="field">
+   
+    <%= f.text_field :name, :id=>'address', :placeholder=>"Enter an address", :class=>'typeahead'%>
+  </div>
+ <pre class="response" id="response1"></pre>
+      
+ <pre class="response" id="forecast"></pre>
   
 <% end %>
 
 
-<table>
+<!-- <table>
   <thead>
     <tr>
       <th>Geoname</th>
@@ -60,3 +59,4 @@
 <br>
 
 <%= link_to 'New Forecasting', new_forecasting_path %>
+ -->

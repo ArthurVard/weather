@@ -1,0 +1,17 @@
+html = ["Address:  "+ "<%= @forecasting.name %>"]
+html.push("Latitude: " +    "<%= @forecasting.data['latitude'] %>" )
+html.push("Longitude: " +   "<%= @forecasting.data['longitude'] %>" )
+html.push("timezone: "  +   "<%= @forecasting.data['timezone'] %>" )
+html.push("Currently:")
+html.push("  time: " +        "<%= @forecasting.data['currently']['time'] %>" )
+html.push("  summary: " +     "<%= @forecasting.data['currently']['summary'] %>" )
+html.push("	 icon: " +        "<%= @forecasting.data['currently']['icon'] %>" )
+html.push("	 temperature: " + "<%= @forecasting.data['currently']['temperature'] %>" )
+html.push("	 humidity: " +    "<%= @forecasting.data['currently']['humidity'] %>" )
+html.push("	 windSpeed: " +   "<%= @forecasting.data['currently']['windSpeed'] %>" )
+html.push("	 pressure: " +    "<%= @forecasting.data['currently']['pressure'] %>" )
+html.push("	 ozone: " +       "<%= @forecasting.data['currently']['ozone'] %>" )
+
+$('#forecast').html( html.join('\n'))
+
+
