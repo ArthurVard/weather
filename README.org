@@ -54,3 +54,6 @@
    Your free to use any UI library of your choosing.
 
 
+
+** more feature (optional)
+*** determine the location of user by IP and load page with forecast information
