@@ -42,7 +42,7 @@
    version saved in the database instead of connecting to the API. 
    Even if the forecast is old, you can still use the database version. For 
    this project, you do not need to worry about whether the forecast is old or expired.
-*** Persist forecast for later use
+*** DONE Persist forecast for later use
 *** update persisted data (optional)
 
 ** display via Ajax 
@@ -54,8 +54,7 @@
 ** UI/UX
    The interface should be pleasant and a good experience for the user. 
    Your free to use any UI library of your choosing.
-
-
-
+*** TODO add https://github.com/darkskyapp/skycons/ bits to project
+*** TODO use skycons
 ** more feature (optional)
 *** determine the location of user by IP and load page with forecast information
