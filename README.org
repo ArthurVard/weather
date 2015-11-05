@@ -5,7 +5,7 @@
 #+UPDATE: 08:35:49
 #+STARTUP: content
 
-[[arthuvard.github.com/weather][well formatted html view]]
+[[https://arthurvard.github.io/weather/][well formatted html view]]
 
 * Instructions / Requirements:
 ** Connect to [[https://developer.forecast.io][Weather API]] via HTTP client  
