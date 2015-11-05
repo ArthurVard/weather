@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103123814) do
+ActiveRecord::Schema.define(version: 20151105090408) do
 
   create_table "forecastings", force: true do |t|
-    t.string   "geoname_id"
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "geoname"
   end
 
 end

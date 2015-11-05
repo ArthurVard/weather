@@ -49,14 +49,14 @@ $('#address').typeahead(null, {
       })
       $('#response1').html( html.join('\n'))
 
-      ajaxCall();
+      //ajaxCall();
     })
 
     $('#address').on('keypress', function (e) {
 
     	if(e.keyCode === 13){
             $('#address').select();
-             $('#response1').html('');
+             //$('#response1').html('');
              $('#forecast').html('');
              getPostal();
              ajaxCall();

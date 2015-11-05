@@ -15,7 +15,9 @@ html.push("	 pressure: " +    "<%= @forecasting.data['currently']['pressure'] %>
 html.push("	 ozone: " +       "<%= @forecasting.data['currently']['ozone'] %>" )
 
 $('#forecast').html( html.join('\n'))
+
 <% else %>
+$('#response1').html('')
 $('#forecast').html( 'could not find any forecast for given place,\nplease input postal code or use geoname sugestions.')
 <% end %>
 
