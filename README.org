@@ -5,6 +5,8 @@
 #+UPDATE: 08:35:49
 #+STARTUP: content
 
+[[arthuvard.github.com/weather][well formatted html view]]
+
 * Instructions / Requirements:
 ** Connect to [[https://developer.forecast.io][Weather API]] via HTTP client  
    Build an application that connects to a Weather API, without using the
