@@ -17,8 +17,22 @@ class ForecastingsController < ApplicationController
           format.html {redirect_to :back}
         end
       end
-    else
+    elsif params[:lat].present? && params[:lng].present?
+      forecast = ForecastIO::Forecast.new
+      lat = params[:lat]
+      lng = params[:lng]
+      @forecasting.name = "unknown"
+      @forecasting.name = params[:name] if params[:name].present?
+      @forecasting.data = forecast.forecastBy(lat,lng)
+      respond_to do |format|
+        if request.xhr?
+          format.js
+        else
+          format.html {redirect_to :back}
+        end
+    
       #weather for IP location or nothing to do 
+    end
     end
   end
 

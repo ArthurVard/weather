@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Forecast Project in Ruby n Rails</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Forecast Project in Ruby n Rails"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2015-11-03"/>
+<meta name="author" content="Arthur Vardanyan"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Forecast Project in Ruby n Rails</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Instructions / Requirements:</a>
+<ul>
+<li><a href="#sec-1-1">1.1 Connect to Weather API via HTTP client</a>
+<ul>
+<li><a href="#sec-1-1-1">1.1.1 Create Rails app</a></li>
+<li><a href="#sec-1-1-2">1.1.2 HTTP client set up</a></li>
+<li><a href="#sec-1-1-3">1.1.3 scaffold controller for forecast requests</a></li>
+<li><a href="#sec-1-1-4">1.1.4 set root path</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-2">1.2 Display forecast for Postal code or City/State</a>
+<ul>
+<li><a href="#sec-1-2-1">1.2.1 Get (latitude,langitude) by name</a></li>
+<li><a href="#sec-1-2-2">1.2.2 make geoname's list by given postalcode and ajax to forecast for each</a></li>
+<li><a href="#sec-1-2-3">1.2.3 create new brunch and move to use Complete Ruby geocoding solution. (priority: :low)</a></li>
+<li><a href="#sec-1-2-4">1.2.4 by postal code</a></li>
+<li><a href="#sec-1-2-5">1.2.5 display forecast</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-3">1.3 autocomplete box with recommended results for postal code, city/state</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1 set up autocomplete data and bind to view</a></li>
+<li><a href="#sec-1-3-2">1.3.2 (optional) make autocomplete sugestion for postal code using this source http://www.geonames.org/postalCodeLookupJSON?postalcode=6600&amp;callback=?</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-4">1.4 Persist forecast data for later use</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1 Persist forecast for later use</a></li>
+<li><a href="#sec-1-4-2">1.4.2 update persisted data (optional)</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-5">1.5 display via Ajax</a>
+<ul>
+<li><a href="#sec-1-5-1">1.5.1 ajax displating forecast</a></li>
+</ul>
+</li>
+<li><a href="#sec-1-6">1.6 UI/UX</a></li>
+<li><a href="#sec-1-7">1.7 more feature (optional)</a>
+<ul>
+<li><a href="#sec-1-7-1">1.7.1 determine the location of user by IP and load page with forecast information</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Instructions / Requirements:</h2>
+<div class="outline-text-2" id="text-1">
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Connect to <a href="https://developer.forecast.io">Weather API</a> via HTTP client</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<p>   Build an application that connects to a Weather API, without using the
+   official/unofficial API libraries. Instead, use a Ruby HTTP client to handle 
+   the API calls. (<a href="https://developer.forecast.io">https://developer.forecast.io</a>)
+</p>
+</div>
+
+<div id="outline-container-1-1-1" class="outline-4">
+<h4 id="sec-1-1-1"><span class="section-number-4">1.1.1</span> <span class="done DONE">DONE</span> Create Rails app</h4>
+<div class="outline-text-4" id="text-1-1-1">
+
+<p>    <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-03 Tue 06:07</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-1-2" class="outline-4">
+<h4 id="sec-1-1-2"><span class="section-number-4">1.1.2</span> <span class="done DONE">DONE</span> HTTP client set up</h4>
+<div class="outline-text-4" id="text-1-1-2">
+
+<p>    <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-03 Tue 07:55</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-1-3" class="outline-4">
+<h4 id="sec-1-1-3"><span class="section-number-4">1.1.3</span> <span class="done DONE">DONE</span> scaffold controller for forecast requests</h4>
+<div class="outline-text-4" id="text-1-1-3">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-03 Tue 21:45</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-1-4" class="outline-4">
+<h4 id="sec-1-1-4"><span class="section-number-4">1.1.4</span> <span class="done DONE">DONE</span> set root path</h4>
+<div class="outline-text-4" id="text-1-1-4">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-03 Tue 21:45</span></span><br/>
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Display forecast for Postal code or City/State</h3>
+<div class="outline-text-3" id="text-1-2">
+
+<p>   Allow the user to type in a Postal Code or City/State and have their 
+   forecast displayed.
+</p>
+</div>
+
+<div id="outline-container-1-2-1" class="outline-4">
+<h4 id="sec-1-2-1"><span class="section-number-4">1.2.1</span> <span class="done DONE">DONE</span> Get (latitude,langitude) by name</h4>
+<div class="outline-text-4" id="text-1-2-1">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-03 Tue 21:46</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2-2" class="outline-4">
+<h4 id="sec-1-2-2"><span class="section-number-4">1.2.2</span> <span class="done DONE">DONE</span> make geoname's list by given postalcode and ajax to forecast for each</h4>
+<div class="outline-text-4" id="text-1-2-2">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-05 Thu 09:23</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2-3" class="outline-4">
+<h4 id="sec-1-2-3"><span class="section-number-4">1.2.3</span> <span class="todo TODO">TODO</span> create new brunch and move to use <a href="http://www.rubygeocoder.com/">Complete Ruby geocoding solution.</a> (priority: :low)</h4>
+<div class="outline-text-4" id="text-1-2-3">
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2-4" class="outline-4">
+<h4 id="sec-1-2-4"><span class="section-number-4">1.2.4</span> <span class="done DONE">DONE</span> by postal code</h4>
+<div class="outline-text-4" id="text-1-2-4">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-04 Wed 21:46</span></span><br/>
+</p></div>
+
+</div>
+
+<div id="outline-container-1-2-5" class="outline-4">
+<h4 id="sec-1-2-5"><span class="section-number-4">1.2.5</span> <span class="done DONE">DONE</span> display forecast</h4>
+<div class="outline-text-4" id="text-1-2-5">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> autocomplete box with recommended results for postal code, city/state</h3>
+<div class="outline-text-3" id="text-1-3">
+
+<p>   When the user types in their Postal Code or City/State, display 
+   an autocomplete box with recommended results.
+</p>
+</div>
+
+<div id="outline-container-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> <span class="done DONE">DONE</span> set up autocomplete data and bind to view</h4>
+<div class="outline-text-4" id="text-1-3-1">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-04 Wed 10:14</span></span><br/>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> <span class="todo TODO">TODO</span> (optional) make autocomplete sugestion for postal code using this source <a href="http://www.geonames.org/postalCodeLookupJSON?postalcode=6600&amp;callback">http://www.geonames.org/postalCodeLookupJSON?postalcode=6600&amp;callback</a>=?</h4>
+<div class="outline-text-4" id="text-1-3-2">
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Persist forecast data for later use</h3>
+<div class="outline-text-3" id="text-1-4">
+
+<p>   When a forecast is entered, store it in a database (MySql, Postgres, SqlLite,
+   are all fine). When #1 occurs with the same Postal Code or City/State, use the 
+   version saved in the database instead of connecting to the API. 
+   Even if the forecast is old, you can still use the database version. For 
+   this project, you do not need to worry about whether the forecast is old or expired.
+</p>
+</div>
+
+<div id="outline-container-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Persist forecast for later use</h4>
+<div class="outline-text-4" id="text-1-4-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> update persisted data (optional)</h4>
+<div class="outline-text-4" id="text-1-4-2">
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> display via Ajax</h3>
+<div class="outline-text-3" id="text-1-5">
+
+<p>   When a user submits a forecast, display it dynamically on the page without
+   refreshing the page (pure Javascript, JQuery, React, Angular, etc. are all 
+   fine here).
+</p>
+</div>
+
+<div id="outline-container-1-5-1" class="outline-4">
+<h4 id="sec-1-5-1"><span class="section-number-4">1.5.1</span> <span class="done DONE">DONE</span> ajax displating forecast</h4>
+<div class="outline-text-4" id="text-1-5-1">
+
+<p>     <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2015-11-04 Wed 21:46</span></span><br/>
+</p></div>
+</div>
+
+</div>
+
+<div id="outline-container-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> UI/UX</h3>
+<div class="outline-text-3" id="text-1-6">
+
+<p>   The interface should be pleasant and a good experience for the user. 
+   Your free to use any UI library of your choosing.
+</p>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> more feature (optional)</h3>
+<div class="outline-text-3" id="text-1-7">
+
+
+</div>
+
+<div id="outline-container-1-7-1" class="outline-4">
+<h4 id="sec-1-7-1"><span class="section-number-4">1.7.1</span> determine the location of user by IP and load page with forecast information</h4>
+<div class="outline-text-4" id="text-1-7-1">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<p class="date">Date: 2015-11-03</p>
+<p class="author">Author: Arthur Vardanyan</p>
+<p class="creator"><a href="http://orgmode.org">Org</a> version 7.9.3f with <a href="http://www.gnu.org/software/emacs/">Emacs</a> version 24</p>
+<a href="http://validator.w3.org/check?uri=referer">Validate XHTML 1.0</a>
+
+</div>
+</body>
+</html>

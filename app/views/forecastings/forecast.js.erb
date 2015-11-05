@@ -1,3 +1,5 @@
+<% if @forecasting && @forecasting.data && @forecasting.data.any? %>
+
 html = ["Address:  "+ "<%= @forecasting.name %>"]
 html.push("Latitude: " +    "<%= @forecasting.data['latitude'] %>" )
 html.push("Longitude: " +   "<%= @forecasting.data['longitude'] %>" )
@@ -13,5 +15,8 @@ html.push("	 pressure: " +    "<%= @forecasting.data['currently']['pressure'] %>
 html.push("	 ozone: " +       "<%= @forecasting.data['currently']['ozone'] %>" )
 
 $('#forecast').html( html.join('\n'))
+<% else %>
+$('#forecast').html( 'could not find any forecast for given place,\nplease input postal code or use geoname sugestions.')
+<% end %>
 
 

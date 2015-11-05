@@ -20,7 +20,9 @@ function displayResults(result, div) {
 $(document).ready(function() {
 
 
-$('#address').val('')
+$('#address').val('');
+$('#address').focus();
+$('#address').select();
 $("input:text").focus(function() { $(this).select(); } );
 //var addressPicker = new AddressPicker();
 
@@ -33,8 +35,8 @@ $('#address').typeahead(null, {
 
  addressPicker.bindDefaultTypeaheadEvent($('#address'))
     $(addressPicker).on('addresspicker:selected', function (event, result) {
-    console.log(result)
-      html = ["Address: " + result.address()]
+    //console.log(result)
+      var html = ["Address: " + result.address()]
       html.push("Latitude: " + result.lat())
       html.push("Longitude: " + result.lng())
       html.push("Long names:")
@@ -47,22 +49,58 @@ $('#address').typeahead(null, {
       })
       $('#response1').html( html.join('\n'))
 
-      $.ajax({
+      ajaxCall();
+    })
 
+    $('#address').on('keypress', function (e) {
+
+    	if(e.keyCode === 13){
+            $('#address').select();
+             $('#response1').html('');
+             $('#forecast').html('');
+             getPostal();
+             ajaxCall();
+
+        }
+        //return false;
+    });
+  
+    function ajaxCall(){
+
+    	$.ajax({
 				type: "GET",
 				url: "/forecast/?search="+$('#address').val(),
 				success: function(data){
 					$('#address').select()
 				},
-
 				error: function (request, status, error) {
         			alert(error);
         			}
 				});
-    })
-  
-
+    };
 	
+
+function getPostal() {
+	var postal = $("#address").val();
+	console.log(postal);
+	if (postal) {
+	console.log(postal);
+
+		$.getJSON("http://www.geonames.org/postalCodeLookupJSON?&callback=?", {postalcode: postal }, function(response) {
+			console.log(response)
+			if (response && response.postalcodes.length) {
+				var html=[]
+				response.postalcodes.forEach(function(p) {
+					var url='/forecast/?lat='+p.lat+'&lng='+p.lng+'&name='+encodeURIComponent(p.placeName)
+			        html.push('<a href='+ url +' data-remote="true" data-method="get">'+p.placeName+'('+p.lat+','+p.lng+')</a>');
+      			})
+
+				$('#response1').html( html.join('\n'));
+			}
+		})
+	}
+};
+
 
  $("#some_btn_submit").on('click', function(){
  alert("asd");

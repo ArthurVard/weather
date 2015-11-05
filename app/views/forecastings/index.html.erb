@@ -1,3 +1,5 @@
+
+<div class="w-center">
 <%= form_for(@forecasting) do |f| %>
   <% if @forecasting.errors.any? %>
     <div id="error_explanation">
@@ -22,10 +24,10 @@
     </div> -->
 
 
-  <!--  <%= link_to "Forecast", forecast_path(), :method=> :get,  :remote => true %>  -->
+  <%= link_to "Forecast", forecast_path(:lat=>12,:lng=>21), :method=> :get,  :remote => true %> 
   <div class="field">
    
-    <%= f.text_field :name, :id=>'address', :placeholder=>"Enter an address", :class=>'typeahead'%>
+    <%= f.text_field :name, :id=>'address', :placeholder=>"Enter an address", :class=>'typeahead', :autofocus=>"autofocus"%>
   </div>
  <pre class="response" id="response1"></pre>
       
@@ -34,29 +36,6 @@
 <% end %>
 
 
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Geoname</th>
-      <th>Data</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @forecastings.each do |forecasting| %>
-      <tr>
-        <td><%= forecasting.geoname_id %></td>
-        <td><%= forecasting.data["latitude"] %></td>
-        <td><%= link_to 'Show', forecasting %></td>
-        <td><%= link_to 'Edit', edit_forecasting_path(forecasting) %></td>
-        <td><%= link_to 'Destroy', forecasting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-
-<%= link_to 'New Forecasting', new_forecasting_path %>
- -->
+ </div>
