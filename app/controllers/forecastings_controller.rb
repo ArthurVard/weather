@@ -31,6 +31,10 @@ class ForecastingsController < ApplicationController
       end
       #weather for IP location or nothing to do 
     end
+
+    def index
+      @forecasting.name = "Yerevan, Armenia"
+    end
       
     respond_to do |format|
       if request.xhr?
@@ -49,6 +53,7 @@ class ForecastingsController < ApplicationController
 
      def init_forecasting
       @forecasting = Forecasting.new
+      @forecasting.name = "Yerevan, Armenia"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

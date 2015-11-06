@@ -7,7 +7,8 @@
 $(document).ready(function() {
 
 
-$('#address').val('');
+
+
 $('#address').focus();
 $('#address').select();
 $("input:text").focus(function() { $(this).select(); } );
@@ -48,6 +49,11 @@ $('#address').typeahead(null, {
         }
         //return false;
     });
+
+    $('#address').val('Yerevan, Armenia');
+    var e = jQuery.Event("keypress");
+    e.keyCode = 13;
+    $("#address").trigger(e);
 
 });
 

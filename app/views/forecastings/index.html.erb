@@ -13,37 +13,25 @@
     </div>
   <% end %>
 
-<!-- <div class="field">
-   
-    <%= f.text_field :latitude %>
-    <%= f.text_field :longitude %>
-
-  </div>
-   <div class="actions">
-     <%= f.submit  :id=> "btn_submit"%>
-    </div> -->
-
 
  <!--  <%= link_to "Forecast", forecast_path(:lat=>12,:lng=>21), :method=> :get,  :remote => true %>  -->
-  <div class="field">
+  <div class="w-forecast">
+    <div class="w-currently">
+    <div id="geoname" class="w-geoname">  </div><br>
+    <div id="current_temp" class="w-temp">  </div><br>
+    <canvas id="current_icon" class="w-icon" width="128" height="128"></canvas><br>
+    <div id="current_summary" class="w-summary">  </div>
+   <br>
    
     <%= f.text_field :name, :id=>'address', :placeholder=>"enter an address or postal code", :class=>'typeahead', :autofocus=>"autofocus"%>
+     </div>
+    <pre class="response" id="response1">
+    </pre>
+    <pre class="response" id="forecast"></pre>
   </div>
-   <div>
-      <canvas id="current_icon" width="128" height="128"></canvas><br>
-      <span id="current_temp">  </span><br>
-      <span id="current_summary">  </span>
-   </div>
- <pre class="response" id="response1">
-  
- </pre>
-      
- <pre class="response" id="forecast"></pre>
-  
+
+
 <% end %>
-
-
-
 
  </div>
 

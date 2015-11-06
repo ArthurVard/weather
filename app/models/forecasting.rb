@@ -18,6 +18,14 @@ class Forecasting < ActiveRecord::Base
 		self.longitude= data['longitude']
 	end	
 
+	def icon_color
+		if current_summary.include? "Clear"
+			"yellow"
+		else
+			"blue"
+		end
+	end
+
 	def current_icon
 		if data && data['currently'] 
 			data['currently']['icon'] 
@@ -33,7 +41,7 @@ class Forecasting < ActiveRecord::Base
 
 	def current_temperatureC
 		if data && data['currently'] 
-			(5.0/9.0 *(data['currently']['temperature'] - 32)).round(2)
+			(5.0/9.0 *(data['currently']['temperature'] - 32)).round
 		end
 	end
 end

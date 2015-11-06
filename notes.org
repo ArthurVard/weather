@@ -4,6 +4,8 @@
 #+DATE: 2015-11-03
 #+UPDATE: 08:35:49
 #+STARTUP: content
+[[https://github.com/ArthurVard/weather][
+source on github]]
 
 * Instructions / Requirements:
 ** Connect to [[https://developer.forecast.io][Weather API]] via HTTP client  
@@ -54,7 +56,7 @@
    Your free to use any UI library of your choosing.
 *** DONE add https://github.com/darkskyapp/skycons/ bits to project
 *** DONE use skycons
-*** TODO add styles to summary, temperature information section
+*** DONE add styles to summary, temperature information section
 *** TODO display more detailed information
 ** more feature (optional)
 *** determine the location of user by IP and load page with forecast information
