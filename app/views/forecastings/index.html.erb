@@ -29,7 +29,14 @@
    
     <%= f.text_field :name, :id=>'address', :placeholder=>"enter an address or postal code", :class=>'typeahead', :autofocus=>"autofocus"%>
   </div>
- <pre class="response" id="response1"></pre>
+   <div>
+      <canvas id="current_icon" width="128" height="128"></canvas><br>
+      <span id="current_temp">  </span><br>
+      <span id="current_summary">  </span>
+   </div>
+ <pre class="response" id="response1">
+  
+ </pre>
       
  <pre class="response" id="forecast"></pre>
   
@@ -39,3 +46,4 @@
 
 
  </div>
+

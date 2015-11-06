@@ -17,3 +17,4 @@
 //= require typeahead.js/dist/bloodhound
 //= require typeahead.js/dist/typeahead.jquery
 //= require typeahead-addresspicker/dist/typeahead-addresspicker
+//= require skycons.min

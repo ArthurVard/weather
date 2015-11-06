@@ -17,4 +17,23 @@ class Forecasting < ActiveRecord::Base
 		self.latitude= data['latitude']
 		self.longitude= data['longitude']
 	end	
+
+	def current_icon
+		if data && data['currently'] 
+			data['currently']['icon'] 
+		end
+	end
+
+	def current_summary
+		if data && data['currently'] 
+			data['currently']['summary'] 
+		end
+	end
+
+
+	def current_temperatureC
+		if data && data['currently'] 
+			(5.0/9.0 *(data['currently']['temperature'] - 32)).round(2)
+		end
+	end
 end

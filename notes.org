@@ -1,11 +1,9 @@
-#+TITLE: Forecast Project in Ruby n Rails
+#+TITLE: Weather Project in Ruby n Rails
 #+AUTHOR: Arthur Vardanyan
 #+EMAIL: artie.vard@gmail.com
 #+DATE: 2015-11-03
 #+UPDATE: 08:35:49
 #+STARTUP: content
-
-[[https://arthurvard.github.io/weather/][well formatted html view]]
 
 * Instructions / Requirements:
 ** Connect to [[https://developer.forecast.io][Weather API]] via HTTP client  
@@ -54,7 +52,9 @@
 ** UI/UX
    The interface should be pleasant and a good experience for the user. 
    Your free to use any UI library of your choosing.
-*** TODO add https://github.com/darkskyapp/skycons/ bits to project
-*** TODO use skycons
+*** DONE add https://github.com/darkskyapp/skycons/ bits to project
+*** DONE use skycons
+*** TODO add styles to summary, temperature information section
+*** TODO display more detailed information
 ** more feature (optional)
 *** determine the location of user by IP and load page with forecast information

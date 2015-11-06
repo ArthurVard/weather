@@ -15,6 +15,13 @@ html.push("	 pressure: " +    "<%= @forecasting.data['currently']['pressure'] %>
 html.push("	 ozone: " +       "<%= @forecasting.data['currently']['ozone'] %>" )
 
 $('#forecast').html( html.join('\n'))
+var skycons = new Skycons({"color": "blue"});
+    skycons.add("current_icon", "<%=@forecasting.current_icon%>");
+	skycons.play()
+
+$('#current_temp').html( '<%= @forecasting.current_temperatureC %>'+'<sup>º</sup>C')
+
+$('#current_summary').html('<%= @forecasting.current_summary %>')
 
 <% else %>
 $('#response1').html('')
