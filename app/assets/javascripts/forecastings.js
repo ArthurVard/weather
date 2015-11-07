@@ -8,7 +8,9 @@ $(document).ready(function() {
 
 
 
-
+$('#postalcodes').hide();
+$('#debug').hide();
+$('#details').hide();
 $('#address').focus();
 $('#address').select();
 $("input:text").focus(function() { $(this).select(); } );
@@ -20,10 +22,30 @@ $('#address').typeahead(null, {
   source: addressPicker.ttAdapter()
 });
 
+var tabIds = ['#postalcodes', '#debug', '#details'] 
+
+$('#postals_link').on('click', function(){
+   $('#debug').hide();
+   $('#details').hide();
+   $('#postalcodes').toggle();  
+});
+
+$('#details_link').on('click', function(){
+   $('#postalcodes').hide();
+   $('#debug').hide();
+   $('#details').toggle();  
+});
+
+$('#debug_link').on('click', function(){
+ $('#postalcodes').hide();
+ $('#details').hide();
+ $('#debug').toggle();  
+})
+
  addressPicker.bindDefaultTypeaheadEvent($('#address'))
     $(addressPicker).on('addresspicker:selected', function (event, result) {
     //console.log(result)
-      var html = ["Address: " + result.address()]
+      /*var html = ["Address: " + result.address()]
       html.push("Latitude: " + result.lat())
       html.push("Longitude: " + result.lng())
       html.push("Long names:")
@@ -34,7 +56,7 @@ $('#address').typeahead(null, {
       result.addressTypes().forEach(function(type) {
         html.push("  " + type + ": " + result.nameForType(type, true))
       })
-      $('#response1').html( html.join('\n'))
+      $('#debug').html( html.join('\n'))*/
 
       ajaxCall();
     })
@@ -43,8 +65,8 @@ $('#address').typeahead(null, {
     	if(e.keyCode === 13){
             $('#address').select();
              //$('#response1').html('');
-             $('#forecast').html('');
-             getPostal();
+             $('#debug').html('');
+             getPostal(tabIds);
              ajaxCall();
         }
         //return false;
@@ -95,7 +117,7 @@ $("#some_btn_submit").on('click', function(){
 });
 
 
-function getPostal() {
+function getPostal(tabIds) {
 	var postal = $("#address").val();
 	if (postal) {
 		$.getJSON("http://www.geonames.org/postalCodeLookupJSON?&callback=?", {postalcode: postal }, function(response) {
@@ -107,7 +129,11 @@ function getPostal() {
 			        html.push('<a href='+ url +' data-remote="true" data-method="get">'+p.placeName+'('+p.lat+','+p.lng+')</a>');
       			})
 
-				$('#response1').html( html.join('\n'));
+				$('#postalcodes').html( html.join('\n'));
+          tabIds.forEach(function(id) {
+          $(id).hide();
+        });
+        $('#postalcodes').show();
 			}
 		})
 	}

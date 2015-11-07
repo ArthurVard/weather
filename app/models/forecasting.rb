@@ -38,10 +38,44 @@ class Forecasting < ActiveRecord::Base
 		end
 	end
 
+	def hour_summary
+		if data && data['hourly'] 
+			data['hourly']['summary'] 
+		end
+	end
+
+	def next24_summary
+		if data && data['daily'] 
+			data['daily']['summary'] 
+		end
+	end
+
 
 	def current_temperatureC
 		if data && data['currently'] 
 			(5.0/9.0 *(data['currently']['temperature'] - 32)).round
 		end
 	end
+
+	def details
+		html = '<table>'
+		html << '<tbody>'
+		if data && data['hourly']
+			data['hourly']['data'].each do |d|
+				html << '<tr>'
+				html << '<td><span>'
+				html << d['time'].to_s
+				html << '</span></td>'
+				# html << '<td><span>'
+				# html << d['summary']
+				# html << '</span></td>'
+				html << '</tr>'
+			end
+        end 
+       
+		html << '</tbody>'
+		html << '</table>'
+		puts html
+        html      
+	end	
 end

@@ -14,7 +14,7 @@ html.push("	 windSpeed: " +   "<%= @forecasting.data['currently']['windSpeed'] %
 html.push("	 pressure: " +    "<%= @forecasting.data['currently']['pressure'] %>" )
 html.push("	 ozone: " +       "<%= @forecasting.data['currently']['ozone'] %>" )
 
-$('#forecast').html( html.join('\n'))
+$('#debug').html( html.join('\n'))
 var skycons = new Skycons({"color": "<%=@forecasting.icon_color %>"});
     skycons.add("current_icon", "<%=@forecasting.current_icon%>");
 	skycons.play()
@@ -25,9 +25,17 @@ $('#geoname').html('<%= @forecasting.name %>')
 
 $('#current_summary').html('<%= @forecasting.current_summary %>')
 
+$('#hour_summary').html('<%= @forecasting.hour_summary %>')
+
+$('#next24_summary').html('<%= @forecasting.next24_summary %>')
+
+// $('#details').append($('<div></div>').html(<%= @forecasting.details %>).childrean())
 <% else %>
-$('#response1').html('')
-$('#forecast').html( 'could not find any forecast for given place,\nplease input postal code or use geoname sugestions.')
+$('#postalcodes').html('')
+$('#debug').html( 'could not find any forecast for given place,\nplease input postal code or use geoname sugestions.')
+$('#details').hide();
+$('#postalcodes').hide();
+$('#debug').show();
 <% end %>
 
 

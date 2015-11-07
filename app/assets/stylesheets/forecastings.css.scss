@@ -98,7 +98,8 @@ h4 {
 }
 
 .typeahead {
-  background-color: #fff;
+  background-color: #C9C9C9;
+  color: #787878;
 }
 
 .typeahead:focus {
@@ -174,11 +175,14 @@ h4 {
 
 pre.response {
   float:left;
-  width: 330px;
+  width: 95%;
+  text-align: left;
   height: 200px;
   border: 1px solid #DDD;
   font-size: 12px;
-  /*overflow: scroll;*/
+  overflow: scroll;
+  margin-top: 25px;
+  /*overflow-x: hidden;*/
 }
 
 
@@ -203,35 +207,39 @@ pre.response {
 .w-forecast{
   padding: 1rem 0;
   text-align: center;
-  overflow: hidden;
-  cursor: pointer;
+  /*overflow: hidden;*/
   width: 450px;
 }
 
 
 .w-currently{
-background-color: #E4E4E4;
+  /*background-color: #E4E4E4;*/
+  background-color: #FFF;
   display: block;
   text-align: center;
   padding: 10px 0 10px 0;
-  border: 1px solid blue;
+  border: 2px solid #C9C9C9;
+  border-radius: 6px;
+      box-shadow: 0 8px 6px -2px rgba(30, 42, 54, 0.8);
 }
 
 .w-temp{
   font-size: 2.5rem;
+  font-weight: bold;
   color: blue;
   display: inline;
 }
 
 .w-summary{
-  font-size: 1.5rem;
-  color: blue;
-  margin: 10px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #787878;
+  margin: 20px 0 0 0;
 }
 
 .w-icon{
   display: inline;
-  margin: 5px;
+  margin: 10px 30px 0 20px
 }
 
 .w-geoname{
@@ -240,5 +248,35 @@ background-color: #E4E4E4;
   color: #000066;
 }
 
+.w-r{
+    float:left;
+}
+
+.w-h-summary{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.w-next-summary{
+  margin: 0 0 15px 0;
+  color: #787878;
+  
+  font-weight: bold;
+}
+
+.w-infobar{
+  height: 1em;
+  margin: 5px 0 0 0;
+}
+.w-link {
+  cursor: pointer;
+  color: #787878;
+  float:left; 
+  margin-left: 15px;
+}
+
+.w-link:hover{
+  color:black;
+}
 
 

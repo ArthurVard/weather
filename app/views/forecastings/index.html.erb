@@ -1,37 +1,35 @@
-
 <div class="w-center">
-<%= form_for(@forecasting) do |f| %>
-  <% if @forecasting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@forecasting.errors.count, "error") %> prohibited this forecasting from being saved:</h2>
-
-      <ul>
-      <% @forecasting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <%= form_for(@forecasting) do |f| %>
+    <div class="w-forecast">
+      <div class="w-currently">
+        <div id="geoname" class="w-geoname"></div><br>
+        <canvas id="current_icon" class="w-r w-icon" width="160" height="160"></canvas><br>
+        
+        <div class="w-r">
+          <div id="current_temp" class="w-temp" ></div><br>
+          <div id="current_summary" class="w-summary" ></div><br>
+          
+        </div>
+        <div style="clear:both;">
+          <span class="w-h-summary">NEXT HOUR</span>
+          <div id="hour_summary" class="w-next-summary" ></div>
+          <span class="w-h-summary">NEXT 24 HOURS</span>
+          <div id="next24_summary" class="w-next-summary" ></div>
+        </div>
+        <%= f.text_field :name, :id=>'address', :placeholder=>"enter an address or postal code", :class=>'typeahead', :autofocus=>"autofocus"%>
+        <div class="w-infobar">
+          <span id="postals_link" data-tabname='postalcode_list' class="w-link">postals...</span>
+          <span id="debug_link" data-tabname='forecast' class="w-link">debug</span>
+          <span id="details_link" class="w-link" style="float:right;">detailes...</span>
+        </div>
+      </div>
+      <pre class="response" id="postalcodes"></pre>
+      <pre class="response" id="details">
+       
+      </pre>
+      <pre class="response" id="debug"></pre>
     </div>
   <% end %>
+</div>
 
-
- <!--  <%= link_to "Forecast", forecast_path(:lat=>12,:lng=>21), :method=> :get,  :remote => true %>  -->
-  <div class="w-forecast">
-    <div class="w-currently">
-    <div id="geoname" class="w-geoname">  </div><br>
-    <div id="current_temp" class="w-temp">  </div><br>
-    <canvas id="current_icon" class="w-icon" width="128" height="128"></canvas><br>
-    <div id="current_summary" class="w-summary">  </div>
-   <br>
-   
-    <%= f.text_field :name, :id=>'address', :placeholder=>"enter an address or postal code", :class=>'typeahead', :autofocus=>"autofocus"%>
-     </div>
-    <pre class="response" id="response1">
-    </pre>
-    <pre class="response" id="forecast"></pre>
-  </div>
-
-
-<% end %>
-
- </div>
-
+<!--  <%= link_to "Forecast", forecast_path(:lat=>12,:lng=>21), :method=> :get,  :remote => true %>  -->
